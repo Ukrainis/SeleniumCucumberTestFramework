@@ -16,7 +16,7 @@ public class Driver {
     private void driverInitialization(){
         System.setProperty("webdriver.chrome.driver", "D:\\Soft\\selenium-drivers\\chromedriver.exe");
         System.out.println("Starting driver.");
-        var browserName = "chrome";
+        var browserName = PropertiesUtils.getPropertyValueByKey("browser");
         switch (browserName.toLowerCase()){
             case "chrome":
                 System.out.println("Starting chrome");
