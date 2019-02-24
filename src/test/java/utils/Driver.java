@@ -14,14 +14,12 @@ public class Driver {
     }
 
     private void driverInitialization(){
-        System.setProperty("webdriver.chrome.driver", "D:\\Soft\\selenium-drivers\\chromedriver.exe");
-        System.out.println("Starting driver.");
         var browserName = PropertiesUtils.getPropertyValueByKey("browser");
+        System.out.format("Starting driver: %s. \n", browserName);
         switch (browserName.toLowerCase()){
             case "chrome":
-                System.out.println("Starting chrome");
+                setPropertyForChromeDriver();
                 driver = new ChromeDriver();
-                System.out.println("Before break.");
                 break;
             case "firefox":
                 driver = new FirefoxDriver();
@@ -36,7 +34,13 @@ public class Driver {
     }
 
     public WebDriverWait getWebDriverWait(){
-        return new WebDriverWait(driver, 120);
+        return new WebDriverWait(driver, 60);
+    }
+
+    private void setPropertyForChromeDriver(){
+        var chromeDriver = PropertiesUtils.getPropertyValueByKey("chromedriver");
+        System.out.println(String.format("Driver place: %s", chromeDriver));
+        System.setProperty("webdriver.chrome.driver", chromeDriver);
     }
 
     public void terminateDriver(){
